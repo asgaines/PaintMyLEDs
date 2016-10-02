@@ -4,6 +4,8 @@ var Particle = require('particle-api-js');
 var mongoose = require('mongoose');
 var Painting = mongoose.model('Painting');
 
+var config = require('../config');
+
 var particle = new Particle();
 
 /* GET home page. */
@@ -16,7 +18,7 @@ router.post('/', function(req, res, next) {
     { 
       name: 'led-data',
       data: req.body.data,
-      auth: 'f28e2e04497809ef8edaadbc8b4dcf25c6a69aeb'
+      auth: config.particle.access_token
     }
   );
 
@@ -29,7 +31,6 @@ router.post('/', function(req, res, next) {
             return next(err);
           }
         });
-        console.log(data.body);
         res.json(data.body);
       }
     },
