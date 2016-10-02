@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+require('./models/Paintings');
+mongoose.connect('mongodb://localhost/leds');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
