@@ -61,9 +61,19 @@ app.controller('MainCtrl', [
       $http.post('/', {
         data: $scope.grid.getData(),
         artist: $scope.artist
-      }).success(function(data) {
-        $scope.message = 'Your drawing has been successfully submitted';
-        $scope.grid = new Grid($scope.canvas, 8, 16);
+      }).then(function(data) {
+        if (data.data.return_value) {
+          $scope.successMessage = 'Your painting has been successfully uploaded to the LED grid! Click Submissions tab above to view.';
+          $scope.grid = new Grid($scope.canvas, 8, 16, true);
+        } else if (data.data.statusCode == 400) {
+          $scope.errorMessage = 'Sorry, the LED grid is currently off-line';
+        } else {
+          $scope.errorMessage = 'Sorry, something went wrong';
+        }
+      }, function(response){
+        $scope.errorMessage = 'Sorry, something went wrong';
+      }).finally(function() {
+        $scope.loading = false
       });
     }
   }
