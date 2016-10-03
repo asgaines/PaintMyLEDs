@@ -64,7 +64,7 @@
       </div>
       <div class="row">
         <div class="col-md-12 text-center">
-          <div ng-repeat="painting in paintings">
+          <div ng-repeat="painting in paintings | orderBy: '-createdAt'">
             <draw-canvas painting="painting"></draw-canvas>
             <div>
               {{ painting.createdAt | date:'MMMM d, yyyy \'at\' h:mm:ss' }}
