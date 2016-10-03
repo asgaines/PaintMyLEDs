@@ -14,31 +14,31 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var publishEvent = particle.publishEvent(
-    { 
+  var fnPr = particle.callFunction(
+    {
+      deviceId: config.particle.deviceId,
       name: 'led-data',
-      data: req.body.data,
-      auth: config.particle.access_token
+      argument: req.body.data,
+      auth: config.particle.accessToken
     }
   );
 
-  publishEvent.then(
+  fnPr.then(
     function(data) {
-      if (data.body.ok) {
+      if (data.body.connected && data.body.return_value) {
         var painting = new Painting(req.body);
         painting.save(function(err, painting) {
           if (err) {
             return next(err);
           }
         });
-        res.json(data.body);
       }
+      res.json(data.body);
     },
     function(err) {
       res.json(err);
     }
   );
-
 });
 
 router.get('/paintings', function(req, res, next) {
