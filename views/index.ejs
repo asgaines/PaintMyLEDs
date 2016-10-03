@@ -67,7 +67,7 @@
           <div ng-repeat="painting in paintings | orderBy: '-createdAt'">
             <draw-canvas painting="painting"></draw-canvas>
             <div>
-              {{ painting.createdAt | date:'MMMM d, yyyy \'at\' h:mm:ss' }}
+              {{ painting.createdAt | date:'MMMM d, yyyy \'at\' h:mm:ss a' }}
             </div>
             <div ng-show="painting.artist">
               by {{ painting.artist }}
