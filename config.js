@@ -3,7 +3,8 @@ var config = {
     uri: process.env.MONGODB_URI
   },
   particle: {
-    access_token: process.env.PARTICLE_ACCESS_TOKEN
+    accessToken: process.env.PARTICLE_ACCESS_TOKEN,
+    deviceId: process.env.PARTICLE_DEVICE_ID,
   },
 }
 
