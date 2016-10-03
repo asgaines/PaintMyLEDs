@@ -52,7 +52,7 @@ app.controller('MainCtrl', [
   '$scope',
   '$http',
   function($scope, $http) {
-    $scope.message = 'Click Publish when complete';
+    $scope.message = 'Click `Publish` when complete';
     $scope.canvas = document.getElementById('ledGrid');
     $scope.grid = new Grid($scope.canvas, 8, 16, true);
 
