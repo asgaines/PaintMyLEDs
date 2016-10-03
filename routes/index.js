@@ -10,7 +10,7 @@ var particle = new Particle();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'PaintMyLEDs' });
+  res.render('index', { title: 'Paint My LEDs' });
 });
 
 router.post('/', function(req, res, next) {
