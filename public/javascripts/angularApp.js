@@ -43,7 +43,7 @@ app.directive('drawCanvas', function() {
     element.ready(function() {
       element.append('<canvas id="' + scope.painting._id + '" width="800" height="400"></canvas>');
       var canvas = document.getElementById(scope.painting._id);
-      var g = new Grid(canvas, 8, 16, scope.painting.data);
+      var g = new Grid(canvas, 8, 16, false, scope.painting.data);
     });
   }
 });
@@ -54,7 +54,8 @@ app.controller('MainCtrl', [
   function($scope, $http) {
     $scope.message = 'Click Publish when complete';
     $scope.canvas = document.getElementById('ledGrid');
-    $scope.grid = new Grid($scope.canvas, 8, 16);
+    $scope.grid = new Grid($scope.canvas, 8, 16, true);
+
     $scope.publishGrid = function() {
       $scope.loading = true;
       $http.post('/', {
