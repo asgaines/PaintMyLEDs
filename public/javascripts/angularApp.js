@@ -56,6 +56,7 @@ app.controller('MainCtrl', [
     $scope.canvas = document.getElementById('ledGrid');
     $scope.grid = new Grid($scope.canvas, 8, 16);
     $scope.publishGrid = function() {
+      $scope.loading = true;
       $http.post('/', {
         data: $scope.grid.getData(),
         artist: $scope.artist
