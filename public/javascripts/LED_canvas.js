@@ -1,4 +1,4 @@
-var Grid = function(canvas, rows, cols, dataStr) {
+var Grid = function(canvas, rows, cols, editable, dataStr) {
   this.canvas = canvas;
   this.ctx = this.canvas.getContext("2d");
   this.rows = rows;
@@ -12,7 +12,10 @@ var Grid = function(canvas, rows, cols, dataStr) {
     this.matrix = this.matrixFromData(dataStr);
   }
 
-  this.canvas.onclick = this.mouseDown.bind(this);
+  if (editable) {
+    this.canvas.onclick = this.mouseDown.bind(this);
+  }
+
   this.draw();
 };
 
