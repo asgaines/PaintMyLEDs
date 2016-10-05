@@ -71,12 +71,19 @@ Grid.prototype.draw = function() {
         this.ctx.arc(col * colWidth + colWidth / 2, row * rowHeight + rowHeight / 2, colWidth / 3, 0, 2*Math.PI);
         this.ctx.fill();
 
-        // Draw a white-ish glare, slightly off-center
+        // Draw a white-ish red glare, slightly off-center
         this.ctx.fillStyle = "#FF5555";
         this.ctx.beginPath();
         this.ctx.arc(col * colWidth + colWidth / 2 - colWidth / 8, row * rowHeight + rowHeight / 2 - rowHeight / 6, colWidth / 11, 0, 2*Math.PI);
         this.ctx.fill();
+      } else {
+        // Draw a gray-ish glare, slightly off-center
+        this.ctx.fillStyle = "#EEEEEE";
+        this.ctx.beginPath();
+        this.ctx.arc(col * colWidth + colWidth / 2 - colWidth / 8, row * rowHeight + rowHeight / 2 - rowHeight / 6, colWidth / 11, 0, 2*Math.PI);
+        this.ctx.fill();
       }
+
       // Draw edge of LED
       this.ctx.beginPath();
       this.ctx.arc(col * colWidth + colWidth / 2, row * rowHeight + rowHeight / 2, colWidth / 3, 0, 2*Math.PI);
