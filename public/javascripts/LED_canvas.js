@@ -62,9 +62,6 @@ Grid.prototype.draw = function() {
   var colWidth = this.width / this.cols;
   var rowHeight = this.height / this.rows;
 
-  this.ctx.beginPath();
-  this.ctx.strokeRect(0, 0, this.width, this.height);
-
   for (var col = 0; col < this.cols; col++) {
     for (var row = 0; row < this.rows; row++) {
       if (this.matrix[col][row]) {

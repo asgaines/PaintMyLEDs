@@ -26,3 +26,8 @@ a {
 .success {
 	color: #33BB33;
 }
+
+.led-grid {
+	border: 2px solid;
+	border-radius: 7px;
+}
