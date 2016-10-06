@@ -26,12 +26,7 @@ router.post('/', function(req, res, next) {
   fnPr.then(
     function(data) {
       if (data.body.connected && data.body.return_value) {
-        var painting = new Painting(req.body);
-        painting.save(function(err, painting) {
-          if (err) {
-            return next(err);
-          }
-        });
+        // Take picture
       }
       res.json(data.body);
     },
@@ -39,6 +34,13 @@ router.post('/', function(req, res, next) {
       res.json(err);
     }
   );
+
+  var painting = new Painting(req.body);
+  painting.save(function(err, painting) {
+    if (err) {
+      return next(err);
+    }
+  });
 });
 
 router.get('/paintings', function(req, res, next) {
