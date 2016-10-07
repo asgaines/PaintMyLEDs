@@ -62,7 +62,7 @@ app.controller('MainCtrl', [
         if (deviceStatus == 'online') {
           $scope.successMessage = 'The device is currently online and ready for painting submissions.';
         } else if (deviceStatus == 'offline') {
-          $scope.errorMessage = 'The device is currently offline and will not display your painting submission. Submissions will, however, still be saved to the database';
+          $scope.errorMessage = 'The device is currently offline. Submissions won\'t be uploaded to LED grid but will still be saved to the database.';
         }
       },
       function(response) {
@@ -81,7 +81,7 @@ app.controller('MainCtrl', [
           $scope.errorMessage = '';
           $scope.grid = new Grid($scope.canvas, 8, 16, true);
         } else if (data.data.statusCode == 400) {
-          $scope.errorMessage = 'Sorry, the LED grid is currently off-line, so it isn\'t being displayed, though your painting has still been saved. Click Submissions tab above to view.';
+          $scope.errorMessage = 'Sorry, the LED grid is currently off-line, so your submission isn\'t being displayed, though it has still been saved. Click Submissions tab above to view.';
           $scope.successMessage = '';
         } else {
           $scope.errorMessage = 'Sorry, something went wrong';
