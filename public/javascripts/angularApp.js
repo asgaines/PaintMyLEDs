@@ -56,6 +56,20 @@ app.controller('MainCtrl', [
     $scope.canvas = document.getElementById('ledGrid');
     $scope.grid = new Grid($scope.canvas, 8, 16, true);
 
+    $http.get('/status').then(
+      function(response) {
+        var deviceStatus = response.data.deviceStatus;
+        if (deviceStatus == 'online') {
+          $scope.successMessage = 'The device is currently online and ready for painting submissions';
+        } else if (deviceStatus == 'offline') {
+          $scope.errorMessage = 'The device is currently offline and will not display your painting submission. Submissions will, however, still be saved to the database';
+        }
+      },
+      function(response) {
+        console.log('error');
+      }
+    );
+
     $scope.publishGrid = function() {
       $scope.loading = true;
       $http.post('/', {
@@ -64,9 +78,11 @@ app.controller('MainCtrl', [
       }).then(function(data) {
         if (data.data.return_value) {
           $scope.successMessage = 'Your painting has been successfully uploaded to the LED grid! Click Submissions tab above to view.';
+          $scope.errorMessage = '';
           $scope.grid = new Grid($scope.canvas, 8, 16, true);
         } else if (data.data.statusCode == 400) {
           $scope.errorMessage = 'Sorry, the LED grid is currently off-line, so it isn\'t being displayed, though your painting has still been saved. Click Submissions tab above to view.';
+          $scope.successMessage = '';
         } else {
           $scope.errorMessage = 'Sorry, something went wrong';
         }
