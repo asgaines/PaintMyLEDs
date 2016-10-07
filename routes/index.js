@@ -52,4 +52,44 @@ router.get('/paintings', function(req, res, next) {
   });
 });
 
+router.get('/status', function(req, res, next) {
+  if (process.env.PARTICLE_DEVICE_STATUS) {
+    res.json({'deviceStatus': process.env.PARTICLE_DEVICE_STATUS});
+  } else {
+    // There is no currently known status, so fetch it directly
+    var devicesPr = particle.getDevice({
+      deviceId: process.env.PARTICLE_DEVICE_ID,
+      auth: process.env.PARTICLE_ACCESS_TOKEN
+    });
+
+    devicesPr.then(
+      function(data) {
+        var connected = data.body.connected;
+        if (connected) {
+          process.env.PARTICLE_DEVICE_STATUS = 'online';
+          res.json({'deviceStatus': process.env.PARTICLE_DEVICE_STATUS});
+        } else {
+          process.env.PARTICLE_DEVICE_STATUS = 'offline';
+          res.json({'deviceStatus': process.env.PARTICLE_DEVICE_STATUS});
+        }
+      },
+      function(err) {
+        console.log('API failed: ', err);
+      }
+    );
+  }
+});
+
+router.put('/status', function(req, res, next) {
+  // API endpoint for Particle Photon events triggered 
+  // by device coming online / going offline
+  if (req.body.data == 'online') {
+    process.env.PARTICLE_DEVICE_STATUS == 'online';
+  } else if (req.body.data == 'offline') {
+    process.env.PARTICLE_DEVICE_STATUS == 'offline';
+  }
+
+  res.json({'success': true});
+});
+
 module.exports = router;
