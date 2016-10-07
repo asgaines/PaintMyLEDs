@@ -14,26 +14,28 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var fnPr = particle.callFunction(
-    {
-      deviceId: config.particle.deviceId,
-      name: 'led-data',
-      argument: req.body.data,
-      auth: config.particle.accessToken
-    }
-  );
-
-  fnPr.then(
-    function(data) {
-      if (data.body.connected && data.body.return_value) {
-        // Take picture
+  if (process.env.PARTICLE_DEVICE_STATUS == 'online') {
+    var fnPr = particle.callFunction(
+      {
+        deviceId: config.particle.deviceId,
+        name: 'led-data',
+        argument: req.body.data,
+        auth: config.particle.accessToken
       }
-      res.json(data.body);
-    },
-    function(err) {
-      res.json(err);
-    }
-  );
+    );
+
+    fnPr.then(
+      function(data) {
+        if (data.body.connected && data.body.return_value) {
+          // Take picture
+        }
+        res.json(data.body);
+      },
+      function(err) {
+        res.json(err);
+      }
+    );
+  }
 
   var painting = new Painting(req.body);
   painting.save(function(err, painting) {
