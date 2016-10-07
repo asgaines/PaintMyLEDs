@@ -60,7 +60,7 @@ app.controller('MainCtrl', [
       function(response) {
         var deviceStatus = response.data.deviceStatus;
         if (deviceStatus == 'online') {
-          $scope.successMessage = 'The device is currently online and ready for painting submissions';
+          $scope.successMessage = 'The device is currently online and ready for painting submissions.';
         } else if (deviceStatus == 'offline') {
           $scope.errorMessage = 'The device is currently offline and will not display your painting submission. Submissions will, however, still be saved to the database';
         }
