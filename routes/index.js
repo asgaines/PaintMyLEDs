@@ -85,11 +85,9 @@ router.get('/status', function(req, res, next) {
 router.put('/status', function(req, res, next) {
   // API endpoint for Particle Photon events triggered 
   // by device coming online / going offline
-  if (req.body.data == 'online') {
-    process.env.PARTICLE_DEVICE_STATUS = 'online';
-  } else if (req.body.data == 'offline') {
-    process.env.PARTICLE_DEVICE_STATUS = 'offline';
-  }
+  if (req.body.data == 'online' || req.body.data == 'offline') {
+    process.env.PARTICLE_DEVICE_STATUS = req.body.data;
+  };
 
   res.json({'success': true});
 });
