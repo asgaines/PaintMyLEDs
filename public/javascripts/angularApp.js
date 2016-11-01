@@ -77,11 +77,11 @@ app.controller('MainCtrl', [
         artist: $scope.artist
       }).then(function(data) {
         if (data.data.return_value) {
-          $scope.successMessage = 'Your painting has been successfully uploaded to the LED grid! Click Submissions tab above to view.';
+          $scope.successMessage = 'Your painting has been successfully uploaded to the LED grid! Click Submissions tab above to view all submissions.';
           $scope.errorMessage = '';
           $scope.grid = new Grid($scope.canvas, 8, 16, true);
         } else if (data.data.statusCode == 400) {
-          $scope.errorMessage = 'Sorry, the LED grid is currently off-line, so your submission isn\'t being displayed, though it has still been saved. Click Submissions tab above to view.';
+          $scope.errorMessage = 'Sorry, the LED grid is currently offline, so your submission isn\'t being displayed, though it has still been saved. Click Submissions tab above to view.';
           $scope.successMessage = '';
         } else {
           $scope.errorMessage = 'Sorry, something went wrong';
