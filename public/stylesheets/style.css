@@ -31,3 +31,7 @@ a {
 	border: 2px solid;
 	border-radius: 7px;
 }
+
+.space-bottom {
+	margin-bottom: 10px;
+}
