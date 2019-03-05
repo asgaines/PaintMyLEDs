@@ -1,0 +1,53 @@
+<ng-container *ngIf="loaded; else loading">
+    <mat-paginator
+        [length]="paintings.length"
+        [pageSize]="pageState.pageSize"
+        [pageIndex]="pageState.pageIndex"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="paginate($event)">
+    </mat-paginator>
+    <div class="painting" *ngFor="let painting of visiblePaintings">
+        <grid
+            [data]="painting.rows | rowstodata"
+            [height]="dim"
+            [width]="dim"
+            [editable]="false">
+        </grid>
+
+        <div class="info">
+            <blockquote *ngIf="painting.caption" class="secondary-text center">
+                {{ painting.caption }}
+            </blockquote>
+            <div *ngIf="painting.artist" class="artist center">
+                by {{ painting.artist }}
+            </div>
+            <div class="timestamp center">
+                <div class="create-date">
+                    {{ painting.createDate | date:'MMMM d, yyyy \'at\' h:mm:ss a' }}
+                </div>
+                <div class="secondary-text">
+                    {{ painting.createDate | timesince }}
+                </div>
+            </div>
+            <div class="replay center">
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="replay(painting)"
+                    [disabled]="!replayCallComplete">
+                    Replay
+                </button>
+            </div>
+        </div>
+    </div>
+    <mat-paginator
+        [length]="paintings.length"
+        [pageSize]="pageState.pageSize"
+        [pageIndex]="pageState.pageIndex"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="paginate($event)">
+    </mat-paginator>
+</ng-container>
+<ng-template #loading>
+    Loading...
+</ng-template>

@@ -1,0 +1,48 @@
+<div class="content">
+    <grid
+        [data]="gridData"
+        [height]="dim"
+        [width]="dim"
+        (updated)="gridUpdated($event)">
+    </grid>
+    <div class="artist-form">
+        <form>
+            <div class="form-group">
+                <label for="artist">Name</label>
+                <input
+                    type="text"
+                    id="artist"
+                    name="artist"
+                    [(ngModel)]="painting.artist"
+                    placeholder="Name (optional)" />
+            </div>
+            <div class="form-group">
+                <label for="artist">Caption</label>
+                <textarea id="caption"
+                    name="caption"
+                    [(ngModel)]="painting.caption"
+                    placeholder="Optional">
+                </textarea>
+            </div>
+            <div class="submit center">
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="submit()">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="center">
+        <div class="reset">
+            <button
+                mat-raised-button
+                color="warn"
+                (click)="reset()">
+                Reset
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+:host {
+    font-size: 1.2rem;
+}
+
+.painting {
+    padding: 25px;
+    margin-bottom: 100px;
+}
+
+.replay {
+    button {
+        padding: 10px 30px;
+    }
+}
+
+.info {
+    width: 400px;
+    margin: 15px auto 0;
+    border: 1px #CCC solid;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #F1F1F8;
+}
+
+.artist {
+    margin-bottom: 15px;
+}
+
+.timestamp {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}

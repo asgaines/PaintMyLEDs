@@ -1,21 +1,23 @@
-version: '2'
+version: '3.1'
 services:
   web:
     build: .
     ports:
-      - "3000:3000"
+      - "8080:8080"
     volumes:
       - .:/usr/src/app
     environment:
-      - PARTICLE_ACCESS_TOKEN=${PARTICLE_ACCESS_TOKEN}
-      - PARTICLE_DEVICE_ID=${PARTICLE_DEVICE_ID}
+      - PARTICLE_ACCESS_TOKEN
+      - PARTICLE_DEVICE_ID
+      - MONGO_INITDB_ROOT_PASSWORD
+      - ENV=dev
     depends_on:
       - db
   db:
     image: mongo
     ports:
       - "27017:27017"
-    volumes:
-      - ./data:/data/db
     environment:
-        - MONGO_INITDB_DATABASE=leds:27017
+        - MONGO_INITDB_DATABASE=leds
+        - MONGO_INITDB_ROOT_USERNAME=prometheus
+        - MONGO_INITDB_ROOT_PASSWORD

@@ -1,13 +1,14 @@
-FROM node:6
+FROM node:8.15
 
 WORKDIR /usr/src/app
-COPY package.json .
 
+COPY package.json .
 RUN npm install
 
 COPY . .
-ENV MONGODB_URI "mongodb://db/leds"
 
-EXPOSE 4200
+RUN ./node_modules/@angular/cli/bin/ng build
+
+EXPOSE 8080
 
 CMD ["npm", "start"]

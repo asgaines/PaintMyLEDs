@@ -1,0 +1,46 @@
+.content {
+    padding: 25px;
+}
+
+.submit {
+    button {
+        padding: 10px 30px;
+    }
+}
+
+.reset {
+    margin-top: 25px;
+
+    button {
+        padding: 10px 30px;
+    }
+}
+
+.artist-form {
+    margin: 0 auto 20px;
+    width: 400px;
+    border: 1px #CCC solid;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #F1F1F8;
+
+    input[type=text], textarea {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .submit {
+        margin-top: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin: 10px;
+    }
+}
