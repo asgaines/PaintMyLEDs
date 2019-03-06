@@ -14,7 +14,7 @@ let app = express();
 app.use(bodyParser.json());
 app.use(morgan('combined'));
 
-const distDir = __dirname + '/dist/paintinleds/';
+const distDir = __dirname + '/dist/';
 app.use(express.static(distDir));
 
 app.use((req, res, next) => {
@@ -107,5 +107,5 @@ app.post('/api/paintings', (req, res) => {
 
 // Catch all remaining routes and redirect to index
 app.get('/*', (req, res) => {
-    res.sendFile(__dirname + '/dist/paintinleds/index.html');
+    res.sendFile(__dirname + '/dist/index.html');
 });

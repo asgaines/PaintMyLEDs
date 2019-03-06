@@ -7,7 +7,7 @@ RUN npm install
 
 COPY . .
 
-RUN ./node_modules/@angular/cli/bin/ng build
+RUN ./node_modules/@angular/cli/bin/ng build --output-path dist
 
 EXPOSE 8080
 
