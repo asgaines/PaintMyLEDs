@@ -7,7 +7,8 @@ RUN npm install
 
 COPY . .
 
-RUN ./node_modules/@angular/cli/bin/ng build --output-path dist
+ARG PAINTINLEDS_ENV
+RUN ./build.sh
 
 EXPOSE 8080
 

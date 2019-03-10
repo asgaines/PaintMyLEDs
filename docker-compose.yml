@@ -5,18 +5,23 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - .:/usr/src/app
+      - ./src:/usr/src/app/src
+    build:
+      context: .
+      args:
+        - PAINTINLEDS_ENV
     environment:
       - PARTICLE_ACCESS_TOKEN
       - PARTICLE_DEVICE_ID
       - MONGO_INITDB_ROOT_PASSWORD
-      - ENV=dev
     depends_on:
       - db
   db:
-    image: mongo
+    image: "${PAINTINLEDS_MONGO_IMAGE}"
     ports:
       - "27017:27017"
+    volumes:
+      - ~/db_volumes/paintinleds:/data/db
     environment:
         - MONGO_INITDB_DATABASE=leds
         - MONGO_INITDB_ROOT_USERNAME=prometheus
