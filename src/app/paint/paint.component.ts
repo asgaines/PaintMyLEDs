@@ -43,10 +43,10 @@ export class PaintComponent implements OnInit {
         this._api.postPainting(this.painting, true)
             .pipe(finalize(() => this.apiCallComplete = true))
             .subscribe(
-                res => this.displaySuccess(),
+                res => this.displaySuccess(res),
                 err => {
                     console.error(err);
-                    this.displayError();
+                    this.displayError(err.data);
                 });
     }
 
@@ -55,15 +55,17 @@ export class PaintComponent implements OnInit {
         this.gridUpdated(this.gridData);
     }
 
-    displaySuccess = () => {
+    displaySuccess = (data) => {
         this._snackBar.openFromComponent(SuccessComponent, {
-            duration: 1500,
-        })
+            duration: 2500,
+            data: data,
+        });
     }
 
-    displayError = () => {
+    displayError = (data) => {
         this._snackBar.openFromComponent(ErrorComponent, {
-            duration: 1500,
-        })
+            duration: 10000,
+            data: data,
+        });
     }
 }

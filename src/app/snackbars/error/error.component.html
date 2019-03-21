@@ -1,6 +1,15 @@
-<span class="error">
-    Error during upload.
-    <div class="small desc">
+<span>
+    <span class="error">
+        <div class="desc" *ngFor="let error of errors">
+            {{ error }}
+        </div>
+    </span>
+    <span class="success">
+        <div class="desc" *ngFor="let success of successes">
+            {{ success }}
+        </div>
+    </span>
+    <div class="small">
         Please try again after the developer has had some time to address the problem...
     </div>
 </span>

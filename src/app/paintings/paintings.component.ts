@@ -48,34 +48,36 @@ export class PaintingsComponent implements OnInit {
                     this.paintings = res.slice();
                     this.paginate(this.pageState);
                 },
-                err => console.log(err))
+                err => console.error('Error fetching paintings:', err))
     }
 
     replay = (painting: Painting) => {
         this.replayCallComplete = false;
 
         this._api.postPainting({
-            rows: painting.rows,
+            rows: painting.rows, // TODO: pass the pure painting
         }, false)
             .pipe(finalize(() => this.replayCallComplete = true))
             .subscribe(
-                res => this.displaySuccess(),
+                res => this.displaySuccess(res),
                 err => {
                     console.error(err);
-                    this.displayError();
+                    this.displayError(err.data);
                 });
     }
 
-    displaySuccess = () => {
+    displaySuccess = (data) => {
         this._snackBar.openFromComponent(SuccessComponent, {
-            duration: 1500,
+            duration: 2500,
+            data: data,
         })
     }
 
 
-    displayError = () => {
+    displayError = (data) => {
         this._snackBar.openFromComponent(ErrorComponent, {
-            duration: 1500,
+            duration: 10000,
+            data: data,
         })
     }
 

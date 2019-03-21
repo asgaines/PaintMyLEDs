@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_SNACK_BAR_DATA } from '@angular/material';
 
 @Component({
   selector: 'error',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./error.component.scss']
 })
 export class ErrorComponent implements OnInit {
+    constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
+    successes: string[] = [];
+    errors: string[] = [];
 
-  constructor() { }
+    ngOnInit() {
+        if (this.data.upload === 1) {
+            this.successes.push('Successfully uploaded painting to grid');
+        } else if (this.data.upload === 0) {
+            this.errors.push('Failed to upload painting to grid');
+        }
 
-  ngOnInit() {
-  }
-
+        if (this.data.save === 1) {
+            this.successes.push('Successfully saved painting to archive');
+        } else if (this.data.save === 0) {
+            this.errors.push('Failed to save painting to archive');
+        }
+    }
 }
