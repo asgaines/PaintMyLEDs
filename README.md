@@ -17,7 +17,7 @@ Ensure `PAINTINLEDS_MONGO_IMAGE` is set up accomodate the architecture of the ru
 
 Ensure above steps have been run first.
 
-`docker-compose up web`
+`docker-compose up --build app`
 
 ## Running unit tests
 
