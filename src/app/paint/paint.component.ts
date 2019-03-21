@@ -16,7 +16,7 @@ import { Painting } from '../paintings/painting';
 })
 export class PaintComponent implements OnInit {
     gridData: boolean[][];
-    apiCallComplete: boolean;
+    apiCallComplete: boolean = true;
     showSuccess: boolean;
     dim = Math.min(window.innerWidth * 0.9, 800);
     painting: Painting = new Painting();

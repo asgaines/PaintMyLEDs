@@ -28,7 +28,8 @@
                 <button
                     mat-raised-button
                     color="primary"
-                    (click)="submit()">
+                    (click)="submit()"
+                    [disabled]="!apiCallComplete">
                     Submit
                 </button>
             </div>
@@ -40,7 +41,8 @@
             <button
                 mat-raised-button
                 color="warn"
-                (click)="reset()">
+                (click)="reset()"
+                [disabled]="!apiCallComplete">
                 Reset
             </button>
         </div>
