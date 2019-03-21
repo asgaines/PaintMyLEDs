@@ -37,10 +37,10 @@ export class APIService {
 
     private _handleError = (resp: HttpErrorResponse) => {
         if (resp.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
+            // A client-side or network error occurred
             console.error(`An error occurred: ${resp.error.message}`);
         } else {
-            // The backend returned an unsuccessful response code.
+            // The backend returned an unsuccessful response code
             console.error(`Received API response status: ${resp.status}`);
 
             if (resp.error.errors !== undefined) {
@@ -50,11 +50,10 @@ export class APIService {
             }
         }
 
-        return throwError(
-            {
-                description: 'An error occurred, please try again later',
-                status_code: resp.status,
-                errors: resp.error
-            });
+        return throwError({
+            description: 'An error occurred, please try again later',
+            status_code: resp.status,
+            data: resp.error
+        });
     };
 }
