@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
 import {
-    MatIconModule,
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -22,10 +21,13 @@ import { PaintComponent } from './paint/paint.component';
 import { PaintingsComponent } from './paintings/paintings.component';
 import { GridComponent } from './grid/grid.component';
 import { APIService } from './services/api/api.service';
+import { WebsocketService } from './services/websocket/websocket.service';
 import { SuccessComponent } from './snackbars/success/success.component';
 import { ErrorComponent } from './snackbars/error/error.component';
 import { TimesincePipe } from './pipes/timesince.pipe';
 import { RowstodataPipe } from './pipes/rowstodata.pipe';
+import { NavbarComponent } from './navbar/navbar.component';
+import { GridStatusComponent } from './grid/grid-status/grid-status.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +39,8 @@ import { RowstodataPipe } from './pipes/rowstodata.pipe';
         ErrorComponent,
         TimesincePipe,
         RowstodataPipe,
+        NavbarComponent,
+        GridStatusComponent,
     ],
     entryComponents: [
         SuccessComponent,
@@ -49,7 +53,6 @@ import { RowstodataPipe } from './pipes/rowstodata.pipe';
         FormsModule,
         BrowserAnimationsModule,
         MatMenuModule,
-        MatIconModule,
         MatButtonModule,
         MatSidenavModule,
         MatToolbarModule,
@@ -60,6 +63,7 @@ import { RowstodataPipe } from './pipes/rowstodata.pipe';
     ],
     providers: [
         APIService,
+        WebsocketService,
     ],
     bootstrap: [AppComponent]
 })

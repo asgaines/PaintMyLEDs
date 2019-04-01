@@ -21,6 +21,8 @@ module.exports = {
         app.get('/api/paintings', handlers.getPaintings);
         app.post('/api/paintings', handlers.postPainting);
 
+        app.put('/api/status', handlers.updateStatus)
+
         // Catch all remaining routes and redirect to index
         app.get('/*', (req, res) => {
             res.sendFile(distDir + '/index.html');

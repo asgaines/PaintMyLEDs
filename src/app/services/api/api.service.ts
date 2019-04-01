@@ -35,6 +35,12 @@ export class APIService {
         );
     };
 
+    getStatus = (): Observable<{online: boolean}> => {
+        return this._http.get<any>(`${this.apiUrl}/status`, {}).pipe(
+            catchError(this._handleError)
+        );
+    };
+
     private _handleError = (resp: HttpErrorResponse) => {
         if (resp.error instanceof ErrorEvent) {
             // A client-side or network error occurred

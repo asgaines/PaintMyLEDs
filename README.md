@@ -19,6 +19,10 @@ Ensure above steps have been run first.
 
 `docker-compose up --build app`
 
+## Particle Status
+
+When Prometheus comes online/goes offline, Particle.io emits an event to the `/api/status` endpoint which registers the state and stores it for displaying of status in frontend.
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).

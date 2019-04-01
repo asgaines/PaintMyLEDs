@@ -7,6 +7,7 @@ module.exports = {
     particle: {
         deviceID: process.env.PARTICLE_DEVICE_ID,
         accessToken: process.env.PARTICLE_ACCESS_TOKEN,
+        online: false,
     },
     port: 8080,
 };

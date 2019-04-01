@@ -1,10 +1,8 @@
 const db = require('./db');
 const conf = require('./config');
-const Particle = require('particle-api-js');
-const particle = new Particle();
+const particle = require('./particle');
 const rxjs = require('rxjs');
 const operators = require('rxjs/operators');
-
 
 module.exports = {
     getPaintings: (req, res) => {
@@ -30,13 +28,7 @@ module.exports = {
         let particleStatus = -1;
         let databaseStatus = -1;
 
-
-        let particleSubscription = rxjs.from(particle.callFunction({
-            deviceId: conf.particle.deviceID,
-            name: 'led-data',
-            argument: painting.rows.join(','),
-            auth: conf.particle.accessToken,
-        }));
+        let particleSubscription = particle.submit(painting.rows);
 
         let insertSubscription = rxjs.of(0);
 
@@ -75,4 +67,12 @@ module.exports = {
             );
         }
     },
+
+    updateStatus: (req, res) => {
+        let maybe = Math.random() > 0.5;
+
+        conf.particle.online = maybe;
+        req.app.io.emit('status', {online: conf.particle.online});
+        res.status(200).json({'ok': true});
+    }
 };
