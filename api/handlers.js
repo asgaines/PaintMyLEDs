@@ -69,9 +69,15 @@ module.exports = {
     },
 
     updateStatus: (req, res) => {
-        const basicAuth = req.headers.authentication.split(' ');
+        const auth = req.headers.authorization;
+        if (auth === undefined) {
+            res.status(400).json({error: 'Please include basic auth credentials'});
+            return;
+        }
+
+        const basicAuth = auth.split(' ');
         if (basicAuth[0] === 'Basic') {
-            const userPass = atob(basicAuth[1]).split(':');
+            const userPass = Buffer.from(basicAuth[1], 'base64').toString().split(':');
             if (userPass[0] === conf.particle.auth.username &&
                 userPass[1] === conf.particle.auth.password) {
                 if (['online', 'offline'].includes(req.body.data)) {
@@ -84,7 +90,6 @@ module.exports = {
                 res.status(403).json({error: 'Invalid authentication credentials'});
                 return;
             }
-            console.log(userPass);
         } else {
             res.status(400).json({error: 'Please include basic auth credentials'});
             return;
