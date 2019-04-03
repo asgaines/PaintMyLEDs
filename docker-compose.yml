@@ -14,6 +14,7 @@ services:
     environment:
       - PARTICLE_ACCESS_TOKEN
       - PARTICLE_DEVICE_ID
+      - PARTICLE_AUTH_PASSWORD
       - MONGO_INITDB_ROOT_PASSWORD
     depends_on:
       - db
