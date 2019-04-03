@@ -69,10 +69,11 @@ module.exports = {
     },
 
     updateStatus: (req, res) => {
-        conf.particle.online = req.body.data === 'online';
-        req.app.io.emit('status', {online: conf.particle.online});
-        console.log(req.body.data);
-        console.log(conf.particle.online);
+        if (['online', 'offline'].includes(req.body.data)) {
+            conf.particle.online = req.body.data === 'online';
+            req.app.io.emit('status', {online: conf.particle.online});
+        }
+
         res.status(200).json({ok: true});
     }
 };
