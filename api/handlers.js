@@ -69,10 +69,9 @@ module.exports = {
     },
 
     updateStatus: (req, res) => {
-        let maybe = Math.random() > 0.5;
-
-        conf.particle.online = maybe;
+        conf.particle.online = req.body.connected;
         req.app.io.emit('status', {online: conf.particle.online});
-        res.status(200).json({'ok': true});
+        console.log(req.body);
+        res.status(200).json({ok: true});
     }
 };
