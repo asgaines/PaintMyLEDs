@@ -29,7 +29,9 @@ When Prometheus comes online/goes offline, Particle.io emits an event to the `/a
 See https://console.particle.io/integrations/webhooks/5a0bae309a53a837bb7aab72 for integration configuration.
 
 To simulate a call locally, run\
-`curl -H 'Content-Type: application/json' -X PUT localhost:8080/api/status -d '{"data": "{offline|online}"}'`
+`curl -H 'Content-Type: application/json' -H 'Authorization: Basic <token>' -X PUT localhost:8080/api/status -d '{"data": "offline|online"}'`\
+where the token is a base64 encoded join of username and password by colon (e.g. `username:password` => `dXNlcm5hbWU6cGFzc3dvcmQ=` <- token)
+
 
 See [Particle documentation](https://docs.particle.io/reference/device-cloud/api/#special-events) for more information.
 
