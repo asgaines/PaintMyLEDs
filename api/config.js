@@ -12,6 +12,8 @@ module.exports = {
             username: 'prometheus',
             password: process.env.PARTICLE_AUTH_PASSWORD,
         },
+        // Holds the state of the painting for interactive more, updated with each change
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
     port: 8080,
 };

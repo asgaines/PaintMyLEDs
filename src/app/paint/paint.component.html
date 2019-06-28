@@ -1,3 +1,10 @@
+<div class="live-selector">
+    <mat-slide-toggle
+        [checked]="live"
+        (change)="liveToggled($event)">
+        Live updates to match grid in real-time
+    </mat-slide-toggle>
+</div>
 <div class="content">
     <grid
         [data]="gridData"
@@ -14,23 +21,23 @@
                     id="artist"
                     name="artist"
                     [(ngModel)]="painting.artist"
-                    placeholder="Name (optional)" />
+                    placeholder="optional" />
             </div>
             <div class="form-group">
                 <label for="artist">Caption</label>
                 <textarea id="caption"
                     name="caption"
                     [(ngModel)]="painting.caption"
-                    placeholder="Optional">
+                    placeholder="optional">
                 </textarea>
             </div>
             <div class="submit center">
                 <button
                     mat-raised-button
                     color="primary"
-                    (click)="submit()"
+                    (click)="submit(true)"
                     [disabled]="!apiCallComplete">
-                    Submit
+                    Save
                 </button>
             </div>
         </form>

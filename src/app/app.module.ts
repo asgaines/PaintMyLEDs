@@ -7,6 +7,8 @@ import {
     MatSnackBarModule,
 } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -28,6 +30,8 @@ import { TimesincePipe } from './pipes/timesince.pipe';
 import { RowstodataPipe } from './pipes/rowstodata.pipe';
 import { NavbarComponent } from './navbar/navbar.component';
 import { GridStatusComponent } from './grid/grid-status/grid-status.component';
+import { Dialog } from './grid/grid-status/grid-status.component';
+import { LoadingAnimationComponent } from './loading-animation/loading-animation.component';
 
 @NgModule({
     declarations: [
@@ -41,10 +45,13 @@ import { GridStatusComponent } from './grid/grid-status/grid-status.component';
         RowstodataPipe,
         NavbarComponent,
         GridStatusComponent,
+        Dialog,
+        LoadingAnimationComponent,
     ],
     entryComponents: [
         SuccessComponent,
         ErrorComponent,
+        Dialog,
     ],
     imports: [
         BrowserModule,
@@ -58,6 +65,8 @@ import { GridStatusComponent } from './grid/grid-status/grid-status.component';
         MatToolbarModule,
         MatSnackBarModule,
         MatPaginatorModule,
+        MatDialogModule,
+        MatSlideToggleModule,
         FlexLayoutModule,
         HttpClientModule,
     ],

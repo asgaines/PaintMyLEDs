@@ -1,8 +1,8 @@
-<ng-container *ngIf="loaded">
+<div (click)="openDialog()" *ngIf="loaded">
     <ng-container *ngIf="online; else offline">
         <div class="online" title="The grid is online and ready to receive new paintings"></div>
     </ng-container>
     <ng-template #offline>
         <div class="offline" title="The grid is currently offline. Your painting will be saved in the archive, but not displayed on the grid."></div>
     </ng-template>
-</ng-container>
+</div>

@@ -20,8 +20,7 @@ import { environment } from '../../../environments/environment';
 export class APIService {
     protected apiUrl: string = `${environment.url}/api`;
 
-    constructor(protected _http: HttpClient) {
-    }
+    constructor(protected _http: HttpClient) {}
 
     getPaintings = (): Observable<Painting[]> => {
         return this._http.get<any>(`${this.apiUrl}/paintings`, {}).pipe(

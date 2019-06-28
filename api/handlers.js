@@ -41,10 +41,12 @@ module.exports = {
             rxjs.forkJoin(
                 particleSubscription.pipe(operators.catchError(error => {
                     particleStatus = 0;
+                    console.error(error);
                     return rxjs.of(error);
                 })),
                 insertSubscription.pipe(operators.catchError(error => {
                     databaseStatus = 0;
+                    console.error(error);
                     return rxjs.of(error);
                 }))
             ).subscribe(

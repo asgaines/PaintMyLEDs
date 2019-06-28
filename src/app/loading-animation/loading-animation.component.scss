@@ -1,0 +1,26 @@
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    text-align: center;
+
+    .animation {
+        position: relative;
+        display: inline-block;
+        animation: spinner 1.2s linear infinite;
+        margin-left: 10px;
+        margin-right: 10px;
+
+        .icon {
+            position: relative;
+            top: 10px;
+        }
+    }
+}

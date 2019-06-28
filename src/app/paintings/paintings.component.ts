@@ -8,7 +8,7 @@ import { finalize } from 'rxjs/operators';
 
 import { APIService } from '../services/api/api.service';
 import { Painting } from '../paintings/painting';
-import { Utils } from '../utils/utils';
+import { WebsocketService } from '../services/websocket/websocket.service';
 import { SuccessComponent } from '../snackbars/success/success.component';
 import { ErrorComponent } from '../snackbars/error/error.component';
 
@@ -20,7 +20,6 @@ import { ErrorComponent } from '../snackbars/error/error.component';
 export class PaintingsComponent implements OnInit {
     loaded: boolean = false;
     paintings: Painting[];
-    visiblePaintings: Painting[];
     dim = Math.min(window.innerWidth * 0.9, 800);
     replayCallComplete: boolean = true;
     pageSizeOptions: number[] = [1, 5, 15, 50, 100];
@@ -29,10 +28,14 @@ export class PaintingsComponent implements OnInit {
         pageSize: 15,
         length: 0,
     };
+    start: number;
+    end: number;
 
     constructor(
         private _api: APIService,
-        private _snackBar: MatSnackBar) { }
+        private _ws: WebsocketService,
+        private _snackBar: MatSnackBar
+    ) { }
 
     ngOnInit() {
         this.fetchPaintings()
@@ -54,12 +57,13 @@ export class PaintingsComponent implements OnInit {
     replay = (painting: Painting) => {
         this.replayCallComplete = false;
 
-        this._api.postPainting({
-            rows: painting.rows, // TODO: pass the pure painting
-        }, false)
+        this._api.postPainting(painting, false)
             .pipe(finalize(() => this.replayCallComplete = true))
             .subscribe(
-                res => this.displaySuccess(res),
+                res => {
+                    this.displaySuccess(res);
+                    this._ws.uploadStroke(painting);
+                },
                 err => {
                     console.error(err);
                     this.displayError(err.data);
@@ -82,10 +86,9 @@ export class PaintingsComponent implements OnInit {
     }
 
     paginate = (event: PageEvent) => {
-        const start = event.pageSize * event.pageIndex;
-        const end = event.pageSize * (event.pageIndex + 1);
+        this.start = event.pageSize * event.pageIndex;
+        this.end = event.pageSize * (event.pageIndex + 1);
 
-        this.visiblePaintings = this.paintings.slice(start, end);
         this.pageState = event;
     }
 }

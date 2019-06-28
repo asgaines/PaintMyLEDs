@@ -1,0 +1,18 @@
+<h3>Grid is <span [ngStyle]="{color: data.online ? '#3C3' : '#C33' }">{{ data.online ? 'online' : 'offline' }}</span></h3>
+
+<ng-container *ngIf="data.online; else offline">
+    <p>
+        The LED grid is currently online and accepting uploads from what you paint on the canvas.
+    </p>
+    <p>
+        They will show up on the grid when you submit and will be saved to the archive where you can view it and replay it at any time.
+    </p>
+</ng-container>
+<ng-template #offline>
+    <p>
+        Even though the LED grid is offline, you can still save your painting by drawing on the canvas and submitting.
+    </p>
+    <p>
+        It will be saved to the archive, where you can replay it at any time.
+    </p>
+</ng-template>

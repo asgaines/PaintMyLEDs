@@ -6,7 +6,7 @@
         [pageSizeOptions]="pageSizeOptions"
         (page)="paginate($event)">
     </mat-paginator>
-    <div class="painting" *ngFor="let painting of visiblePaintings">
+    <div class="painting" *ngFor="let painting of paintings | slice:start:end">
         <grid
             [data]="painting.rows | rowstodata"
             [height]="dim"
@@ -49,5 +49,7 @@
     </mat-paginator>
 </ng-container>
 <ng-template #loading>
-    Loading...
+    <div class="loading-spacing">
+        <loading-animation></loading-animation>
+    </div>
 </ng-template>
