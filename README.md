@@ -20,15 +20,18 @@ Set environment variables required by docker-compose file, where `MONGO_INITDB_R
 
 Ensure `PAINTINLEDS_MONGO_IMAGE` is set up accomodate the architecture of the running environment. (ex `andresvidal/rpi3-mongodb3` for arm64 arch)
 
-## Running app
+
+## Particle Status
+
+When Prometheus comes online/goes offline, Particle.io emits an event to the `/api/status` endpoint which registers the state and stores it for displaying of status in frontend.
+
+## Development
 
 Ensure above steps have been run first.
 
 `docker-compose up --build app`
 
-## Particle Status
-
-When Prometheus comes online/goes offline, Particle.io emits an event to the `/api/status` endpoint which registers the state and stores it for displaying of status in frontend.
+The API hosts the UI app. To develop UI, run `ng serve --host 0.0.0.0` and navigate to `localhost:4200`, or setup `ng` server to compile app to location served by API.
 
 ### Relevant for site admins
 

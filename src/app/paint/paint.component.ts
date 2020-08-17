@@ -19,6 +19,7 @@ import { Painting } from '../paintings/painting';
 })
 export class PaintComponent implements OnInit {
     gridData: boolean[][];
+    isMidStroke = false;
     apiCallComplete: boolean = true;
     dim = Math.min(window.innerWidth * 0.9, 800);
     painting: Painting = new Painting();
@@ -42,13 +43,17 @@ export class PaintComponent implements OnInit {
         this._ws.syncStrokes().subscribe(
             res => {
                 if (this.live) {
-                    this.gridData = Utils.rowsToBin(res.data);
+                    // If the artist is already painting a new stroke when former stroke was successful (or
+                    // another painter's stroke is complete), do not update so as not to interrupt
+                    if (!this.isMidStroke) {
+                        this.gridData = Utils.rowsToBin(res.data);
+                    }
                 }
             },
             err => console.error(err));
     }
 
-    gridUpdated = (data: boolean[][]) => {
+    gridUpdated(data: boolean[][]) {
         this.painting.rows = Utils.binRowSum(data);
 
         if (this.live) {
@@ -56,13 +61,18 @@ export class PaintComponent implements OnInit {
         }
     }
 
-    liveToggled = (evt: MatSlideToggleChange) => {
+    isMidStrokeUpdated(isMidStroke: boolean) {
+        this.isMidStroke = isMidStroke;
+    }
+
+    liveToggled(evt: MatSlideToggleChange) {
         this.live = evt.checked;
         localStorage.setItem('live', JSON.stringify(this.live));
     }
 
-    createEmptyGrid = (rows: number, cols: number): boolean[][] =>
-        Array.apply(null, Array(rows)).map(_ => Array.apply(null, Array(cols)).map(_ => false));
+    createEmptyGrid(rows: number, cols: number): boolean[][] {
+        return Array.apply(null, Array(rows)).map(_ => Array.apply(null, Array(cols)).map(_ => false));
+    }
 
     submit = (save: boolean) => {
         this.apiCallComplete = false;

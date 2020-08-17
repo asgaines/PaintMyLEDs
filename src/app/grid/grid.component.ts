@@ -21,6 +21,7 @@ export class GridComponent implements OnInit {
     @Input() width: number;
     @Input() editable: boolean = true;
     @Output() updated = new EventEmitter();
+    @Output() isMidStroke = new EventEmitter<boolean>();
     @ViewChild('grid') grid;
 
     canvas;
@@ -97,6 +98,7 @@ export class GridComponent implements OnInit {
 
     gridMousedown = (evt) => {
         this.down = true;
+        this.isMidStroke.emit(true);
 
         let pos = this.getPos(evt);
 
@@ -111,6 +113,7 @@ export class GridComponent implements OnInit {
 
     gridMouseup = (evt) => {
         this.down = false;
+        this.isMidStroke.emit(false);
         this.updated.emit(this.data);
     }
 

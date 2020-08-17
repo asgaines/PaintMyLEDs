@@ -10,7 +10,8 @@
         [data]="gridData"
         [height]="dim"
         [width]="dim"
-        (updated)="gridUpdated($event)">
+        (updated)="gridUpdated($event)"
+        (isMidStroke)="isMidStrokeUpdated($event)">
     </grid>
     <div class="artist-form">
         <form>
