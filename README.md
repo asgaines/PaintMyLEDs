@@ -51,4 +51,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Hosting Information
 
-A running instance of this project is hosted at [paintinleds.com](paintinleds.com), registration managed by http://domain.com. Their DNS records can be updated to point to an IP address which serves the running instance.
+A running instance of this project is hosted at [paintinleds.com](http://paintinleds.com), registration managed by http://domain.com. Their DNS records can be updated to point to an IP address which serves the running instance.
