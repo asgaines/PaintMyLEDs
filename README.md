@@ -1,5 +1,9 @@
 # Paint in LEDs
 
+Square grid of 256 LEDs individually controllable through web app. Paint on the web canvas and submit the drawing to be uploaded to the physical grid. Turn on grid syncing to paint in real-time with others, each update reflected both on the physical grid and on your web canvas.
+
+LED grid soldered from scratch. LEDs states are managed by 4 MAX7219 display drivers and interfaced with internet via Particle Photon dev board. Web app written in Angular framework.
+
 ## Database initialization
 
 - `docker-compose up -d db`
